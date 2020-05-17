@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 300px;
+        }
+
+        li {
+            padding: 10px;
+            color: #fff;
+            background: #c81622;
+            position: relative;
+            font-size: 14px;
+        }
+
+        .title {
+            padding: 20px 10px;
+            background: #b3191b;
+            font-size: 17px;
+        }
+
+        img {
+            position: absolute;
+            top: 15px;
+            right: 10px;
+        }
+    </style>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <ul>
+            <li class="title">全部商品分类</li>
+            <li v-for="(value) in goodsNav">
+                {{value}}
+                <img src="./img/bg.png" alt="">
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
+<script>
+    let vm = new Vue({
+        el: ".box",
+        data: {
+            goodsNav: {
+                household: "家用电器",
+                digit: '手机 数码 相机',
+                furniture: '家居 家具 家装',
+                attire: '男装 女装 珠宝',
+                jewelry: '鞋靴 箱包 钟表'
+            }
+        },
+    })
+</script>

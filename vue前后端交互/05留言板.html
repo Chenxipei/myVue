@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			ul{
+				border: 1px solid aqua;
+			}
+			li{
+				padding: 10px 0;
+				border: 1px solid darkgray;
+			}
+			li p:first-of-type{
+				font-weight: bold;
+			}
+		</style>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script src="js/vue-resource.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div class="box">
+			<img src="imgs/timg.gif" v-show="isshow">
+			<ul>
+				<li v-for="item in commentListArr">
+					<p>{{item.commentTxt}}</p>
+					<p>{{item.createAt|fmt()}}</p>
+				</li>
+				<button type="button" @click="get()">dian</button>
+			</ul>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	let vm = new Vue({
+		el: '.box',
+		data: {
+			commentListArr: [],
+			isshow:true
+		},
+		filters:{
+			fmt:function(value){
+				return value.substring(0,10)
+			}
+		},
+		mounted: function() {
+			axios.get(
+					'http://api.artgoer.cn:8084/artgoer/api/v1/user/324380/v3/topic/topicHomeByLabel?pageIndex=1&token=b544cd63-6d42-46fe-a96c-3cf96bae3113&topicId=62187'
+				)
+				.then(res => {
+					this.isshow =false
+					console.log(res.data.data.commentList)
+					this.commentListArr = res.data.data.commentList
+				})
+				.catch(err => {
+					console.log(err)
+				})
+		},
+		methods:{
+			get:function(){
+				this.$http.get('http://api.artgoer.cn:8084/artgoer/api/v1/user/324380/v3/topic/topicHomeByLabel?pageIndex=1&token=b544cd63-6d42-46fe-a96c-3cf96bae3113&topicId=62187')
+				.then(res=>{
+					console.log(res)
+				})
+			}
+		}
+	})
+</script>

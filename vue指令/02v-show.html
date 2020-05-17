@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div class="box">
+        <!-- v-show = 表达式(如果为true会显示，反之则不会显示) -->
+        <p v-show ="flag">在不在？</p>
+    </div>
+</body>
+</html>
+<script>
+    let vm = new Vue({
+        el:".box",
+        data:{
+            flag:true
+        }
+    })
+</script>

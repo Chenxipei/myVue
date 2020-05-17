@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="../js/vue.js"></script>
+
+<body>
+    <!-- component组件：自定义标签
+    分类：全局和局部 -->
+    <div id="box">
+        <demo></demo>
+        <demo></demo>
+        <demo-T2></demo-T2>
+    </div>
+    <div class="box">
+        <!-- <demo></demo> -->
+    </div>
+    <template id="mydome">
+        <div>
+            <h1 @click="fn">局部组件</h1>
+            <p>段落,{{msg}}</p>
+        </div>
+    </template>
+</body>
+
+</html>
+<script>
+    let vm = new Vue({
+        el: "#box",
+        data: {
+
+        },
+        components: {
+            'demo': {
+                template: "#mydome",
+                data: function () {
+                    return {
+                        msg: "组件的msg"
+                    }
+                },
+                methods: {
+                    fn() {
+                        console.log('fn')
+                    }
+                }
+            },
+            "demoT2": {
+                template: "<h1>1</h1>"
+            }
+        }
+    })
+    let vm2 = new Vue({
+        el: ".box"
+    })
+</script>

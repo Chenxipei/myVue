@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="./js/vue.js"></script>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			p {
+				margin: 10px 0;
+			}
+			li{
+				list-style: none;
+			}
+
+			.box {
+				margin: 0 auto;
+				width: 300px;
+				background: #eeeeee;
+				padding: 30px;
+			}
+			.finish{
+					color: gainsboro;
+					text-decoration: line-through;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<h1>任务列表</h1>
+			<p>
+				任务总数{{todolist.length}}；还有{{census()}}未完成,【<a href="#" @click="finish()">完成</a>】
+			</p>
+			<ul>
+				<li v-for="(item,index) in todolist" :class="{finish:item.status}">
+					<input type="checkbox" v-model="item.status" /> 
+					<input type="text" v-model="item.name" v-show="item.compile" @blur="item.compile=false"/>
+					<span v-show="!item.compile"  @click="compile(index)">{{item.name}}</span>
+					
+				</li>
+			</ul>
+			<p>
+				<input type="text" name="" id="" value="" v-model="todoname"/> 
+				<button type="button" @click="add()">添加</button>
+			</p>
+		</div>
+	</body>
+</html>
+<script>
+	let vm = new Vue({
+		el: ".box",
+		data: {
+			todolist: [{
+					name: "编写页面代码",
+					status: false,
+					compile:false
+				},
+				{
+					name: "编写js代码",
+					status: false,
+					compile:false
+				},
+				{
+					name: "设计产品原型",
+					status: false,
+					compile:false
+				},
+				{
+					name: "设计",
+					status: false,
+					compile:false
+				},
+			],
+			todoname: "",
+		},
+
+		methods: {
+			census() {
+				let censustodo = 0
+				this.todolist.forEach(item => {
+					if (!item.status) {
+						censustodo ++
+					}
+					
+				})
+				return censustodo
+			},
+			add(){
+				console.log(this.todoname)
+				this.todolist.push({name:this.todoname,status:false,compile:false})
+				this.todoname=""
+			},
+			finish(){
+				let arr = this.todolist
+				this.todolist = []
+				arr.forEach(item=>{
+					if(!item.status){
+						this.todolist.push(item)
+					}
+				})
+			},
+			compile(index){
+				
+				this.todolist[index].compile = true
+			}
+		}
+	})
+</script>

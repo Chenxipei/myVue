@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <myh>
+            嘿嘿额嘿嘿嘿嘿嘿
+        </myh>
+        <myh>
+          哈哈哈哈哈哈哈哈哈哈
+        </myh>
+        <myh>
+           呵呵呵呵呵呵
+        </myh>
+    </div>
+    <template id="myheader">
+        <div>
+            <slot></slot>
+            <h1>标题</h1>
+            <!-- <slot></slot> -->
+            <p>
+                段落
+            </p>
+            <!-- <slot></slot> -->
+        </div>
+    </template>
+</body>
+</html>
+<script src="../js/vue.js"></script>
+<script>
+    let vm=new Vue({
+        el:"#box",
+        data:{},
+        components:{
+            "myh":{
+                template:"#myheader"
+            }
+        }
+    })
+</script>

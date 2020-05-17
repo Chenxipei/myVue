@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="./js/vue.js"></script>
+<body>
+    <div class="box">
+        <input type="text" @input="input" @keydown.left="left()" @keydown.enter="enter()" @keydown.space="space()">
+    </div>
+</body>
+</html>
+<script>
+    let vm = new Vue({
+        el:'.box',
+        data:{
+
+        },
+        methods:{
+           
+            space:function(){
+                console.log('空格')
+            },
+            left:function(){
+                console.log('左')
+            },
+            input:function(){
+                console.log('input')
+            },
+            enter:function(){
+                console.log('回车')
+            },
+        }
+    })
+</script>

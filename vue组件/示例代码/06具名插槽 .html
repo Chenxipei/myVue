@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <myh>
+           <img slot="top" src="../img/6.png" alt="">
+           <img slot="middle" src="../img/7.png" alt="">
+           <img slot="bottom" src="../img/8.png" alt="">
+        </myh>
+        **************************************
+        <myh>
+         <p slot="top">上</p>
+         <p slot="middle">中</p>
+         <p slot="bottom">下</p>
+        </myh>
+        **************************************
+        <myh>
+            <h2 slot="top">h2</h2>
+            <h3 slot="middle">h3</h3>
+            <h4 slot="bottom">h4</h4>
+        </myh>
+    </div>
+    <template id="myheader">
+        <div>
+            <slot name="top"></slot>
+            <h1>标题</h1>
+            <slot name="middle"></slot>
+            <p>
+                段落
+            </p>
+            <slot name="bottom"></slot>
+        </div>
+    </template>
+</body>
+</html>
+<script src="../js/vue.js"></script>
+<script>
+    let vm=new Vue({
+        el:"#box",
+        data:{},
+        components:{
+            "myh":{
+                template:"#myheader"
+            }
+        }
+    })
+</script>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .markdown-text img {
+            width: 100px;
+            height: 100px;
+            display: block;
+        }
+
+        li {
+            position: relative;
+            padding: 10px 20px;
+            list-style: none;
+            border-bottom: 1px solid darkgray;
+        }
+
+        .repliesBox {
+
+            text-decoration: none;
+            color: black;
+            font-size: 14px;
+        }
+        .storey{
+            font-size: 10px;
+            color: darkgrey;
+        }
+        .repliesBox p{
+            margin: 0;
+        }
+        .visit,
+        .time {
+            font-size: 12px;
+        }
+
+        .headerP {
+            width: 30px;
+            height: 30px;
+        }
+        .markdown-text{
+            margin-left: 32px;
+        }
+        .xin{
+            color: red;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<script src="./js/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<body>
+    <div class="box">
+        <h3>{{title}}</h3>
+        <div v-html="content"></div>
+        <ul>
+            <li v-for="(item,index) in repliesArr">
+                <img :src="item.author.avatar_url" alt="" class="headerP">
+                <span>{{item.author.loginname}}</span>
+                <span class="storey">{{index+1}}楼</span>
+                <div>
+                    <div href="" v-html="item.content" class="repliesBox">
+                    </div>
+                    <span class="xin">
+                        ❤{{item.ups.length}}
+                    </span>
+                </div>
+                
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
+<script>
+    let vm = new Vue({
+        el: '.box',
+        data: {
+            title: "",
+            content: "",
+            repliesArr: []
+        },
+        mounted: function () {
+            axios.get(
+                'https://cnodejs.org/api/v1/topic/5ae140407b0e8dc508cca7cc'
+            )
+                .then(res => {
+                    this.title = res.data.data.title
+                    this.content = res.data.data.content
+                    this.repliesArr = res.data.data.replies
+                    console.log(this.repliesArr)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+        methods: {
+
+        }
+    })
+</script>

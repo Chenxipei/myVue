@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">
+        <p>
+           获取msg： {{msg}}
+        </p>
+        <p>
+            数值：{{100}}
+        </p>
+        <p>
+            字符串：{{"张三"}}
+        </p>
+        <p>
+            运算：{{1+1}}
+        </p>
+        <p>
+            拼接：{{msg+'李四'}}
+        </p>
+        <p>
+            三元操作符：1=1？：{{1==1?'对':'错'}}
+        </p>
+        <p>
+            
+        </p>
+    </div>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script>
+let vm = new Vue({
+    el:".box",
+    data:{
+        msg:"hello"
+    }
+}) 
+
+</script>

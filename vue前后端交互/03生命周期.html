@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	</head>
+	<body>
+		<div class="box">
+			<input type="text" v-model="msg">
+			{{msg}}
+		</div>
+	</body>
+</html>
+<script>
+	let vm = new Vue({
+		el: ".box",
+		data: {
+		msg:"你好"
+		},
+		beforeCreate:function(){
+			console.group("***********beforeCreate***********")
+			console.log('el:'+this.$el,'data:'+this.$data,'msg:'+this.msg)
+			// 在创建之前三个都是undefined
+		},
+		created:function(){
+			console.group("***********created***********")
+			console.log('el:'+this.$el,'data:'+this.$data,'msg:'+this.msg)
+			// 在创建完只要el是undefined
+		},
+		beforeMount:function(){
+			console.group("***********beforeMount***********")
+			console.log(this.$el)
+			console.log('el:'+this.$el,'data:'+this.$data,'msg:'+this.msg)
+			// 在挂载之前el是一个dom元素,而在这个dom元素里面的msg并没有解析{{msg}}
+		},
+		mounted: function() {
+			console.group("***********mounted***********")
+			console.log(this.$el)
+			console.log('el:'+this.$el,'data:'+this.$data,'msg:'+this.msg)
+			// 在挂载完成后数据已经解析了
+		},
+		//当data里面的数据发生更新就触发beforeUpdate和updated
+		beforeUpdate:function(){
+			console.group("***********beforeUpdate***********")
+			console.log(this.$el)
+			console.log('el:'+this.$el,'data:'+this.$data,'msg:'+this.msg)
+		},
+		updated:function(){
+			console.group("***********updated***********")
+			console.log(this.$el)
+			console.log('el:'+this.$el,'data:'+this.$data,'msg:'+this.msg)
+		},
+		//当调用$destroy()函数时就会销毁所有监听与事件
+		beforeDestroy:function(){
+			console.group("***********beforeDestroy***********")
+			console.log(this.$el)
+			console.log('el:'+this.$el,'data:'+this.$data,'msg:'+this.msg)
+		},
+		destroyed:function(){
+			console.group("***********destroyed***********")
+			console.log(this.$el)
+			console.log('el:'+this.$el,'data:'+this.$data,'msg:'+this.msg)
+		}
+	})
+	
+	vm.$destroy()
+</script>

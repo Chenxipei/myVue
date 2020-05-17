@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .searchBox {
+            background-color: #8fed93;
+            height: 50px;
+            width: 100%;
+            position: relative;
+        }
+
+        .searchBox input {
+            width: 85%;
+            height: 30px;
+            border: none;
+            outline: none;
+            top: 10px;
+            left: 15px;
+            position: absolute;
+            border-radius: 5px;
+            text-indent: 2.5em;
+        }
+
+        .searchBox img {
+            position: absolute;
+            width: 25px;
+        }
+
+        .search {
+            left: 20px;
+            top: 12.5px;
+        }
+
+        .scan {
+            right: 50px;
+            top: 12.5px;
+        }
+
+        .chat {
+            right: 10px;
+            top: 12.5px;
+        }
+
+        .footBox {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            border-top: 1px solid darkgrey;
+        }
+
+        .footBox .navba {
+            flex: 1;
+            text-align: center;
+            color: #cfcdca;
+            padding-bottom: 5px;
+            font-size: 12px;
+        }
+
+        .footBox img {
+            width: 50%;
+        }
+    </style>
+</head>
+<script src="../js/vue.js"></script>
+
+<body>
+    <div id="box">
+        <myheader></myheader>
+        <myfoot> </myfoot>
+    </div>
+    <template id="myheader">
+        <div class="searchBox">
+            <input type="text" name="" id="" :placeholder="msg">
+            <img @click="fn" class="search" src="../img/ic_search_gray.png" alt="">
+            <img class="scan" src="../img/ic_scan_gray.png" alt="">
+            <img class="chat" src="../img/ic_chat_white.png" alt="">
+        </div>
+    </template>
+
+    <template id="myfoot">
+        <div class="footBox">
+            <cbox img="../img/1.png" txt="首页"></cbox>
+            <cbox img="../img/2.png" txt="搜索"></cbox>
+            <cbox img="../img/3.png" txt="热点首页"></cbox>
+            <cbox img="../img/4.png" txt="购物车"></cbox>
+        </div>
+    </template>
+
+    <template id="cbox">
+        <div class="navba">
+            <img :src="img" alt="">
+            <p>{{txt}}</p>
+        </div>
+    </template>
+</body>
+
+</html>
+<script>
+    let vm = new Vue({
+        el: "#box",
+        components: {
+            "myheader": {
+                template: "#myheader",
+                data: function () {
+                    return {
+                        msg: "请输入搜索的内容"
+                    }
+                },
+                methods: {
+                    fn() {
+                        this.msg = "自定义"
+                    }
+                }
+            },
+            "myfoot": {
+                template: "#myfoot",
+                components: {
+                    "cbox": {
+                        template: "#cbox",
+                        props: ["img", "txt"]
+                    }
+
+                }
+            }
+        }
+    })
+</script>

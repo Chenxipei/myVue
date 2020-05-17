@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="./js/vue.js"></script>
+<body>
+    <div class="box">
+        <h1 v-cloak> 消息{{msg}}</h1>
+        <h1 v-text='msg'>消息</h1>
+        *********************************
+        <div>
+            {{tag}}
+        </div>
+        <div v-text='tag'></div>
+        <div v-html='tag'></div>
+        **********************************
+        <div v-once>{{item}}</div>
+        <div >{{item}}</div>
+        <input type="text" v-model="item">
+    </div>
+</body>
+</html>
+<script>
+    let vm = new Vue({
+        el:'.box',
+        data:{
+            msg:"你好",
+            tag:"<h1>h1</h1>",
+            item:"items"
+        }
+        
+    })
+</script>

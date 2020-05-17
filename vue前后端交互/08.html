@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="./js/vue.js"></script>
+
+<body>
+    <div class="box">
+        <input type="text" v-model="val">
+        <input type="text" v-model="item">
+        <div>
+            {{comData}} {{comData}}
+        </div>
+        <div>
+            {{get()}}{{get()}}
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    let vm = new Vue({
+        el: '.box',
+        data: {
+            val: "",
+            item: ""
+        },
+        computed: {
+            comData() {
+                console.log('computed')
+                return `${this.val}-${this.item}`
+            }
+        },
+        watch: {
+            val:function(newV,oldV){
+                console.log('watch')
+                console.log(this.val,newV,oldV)
+            }
+        },
+        methods: {
+            
+            get: function () {
+                console.log('methods')
+                return `${this.val}-${this.item}`
+            }
+        }
+
+    })
+</script>

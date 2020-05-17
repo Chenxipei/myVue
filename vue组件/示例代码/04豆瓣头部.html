@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .topBox{
+            background-color: #f7f7f7;
+            border-bottom: 1px solid black;
+            position: relative;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+        }
+        .topBox img{
+            width: 30px;
+            position: absolute;
+            top: 10px;
+            }
+            .left{
+                right: 50px;
+            }
+            .right{
+                right: 10px;
+            }
+    </style>
+</head>
+<script src="../js/vue.js"></script>
+
+<body>
+    <div class="box">
+        <top title="书影音" src1="" src2="">
+            <img slot="img1" src="../img/img/ic_actionbar_search_icon.png" alt="" class="left">
+            <img slot="img2" src="../img/img/ic_create_group_chat_blue.png" alt="" class="right">
+        </top>
+        <top title="广播" src1="" src2="">
+            <img slot="img1" src="../img/img/ic_status_search_user.png" alt="" class="left">
+            <img slot="img2" src="../img/img/ic_create_group_chat_blue.png" alt="" class="right">
+        </top>
+        <top title="小组" src1="" src2="">
+            <img slot="img1" src="../img/img/ic_actionbar_search_icon.png" alt="" class="left">
+            <img slot="img2" src="../img/img/ic_create_group_chat_blue.png" alt="" class="right">
+        </top>
+        <top title="我的" src1="" src2="">
+         
+            <img slot="img2" src="../img/img/ic_settings.png" alt="" class="right">
+        </top>
+        <!-- <top title="广播" src1="../img/img/ic_status_search_user.png" src2="../img/img/ic_create_group_chat_blue.png"></top>
+        <top title="小组" src1="../img/img/ic_actionbar_search_icon.png" src2="../img/img/ic_create_group_chat_blue.png"></top>
+        <top title="我的" src2="../img/img/ic_settings.png"></top> -->
+    </div>
+    <template id="mytop">
+        <div class="topBox">
+           {{title}}
+         
+                <!-- <img :src="src1" alt="">
+                <img :src="src2" alt=""> -->
+                <slot name="img1"></slot>
+                <slot name="img2"></slot>
+        </div>
+
+    </template>
+</body>
+
+</html>
+<script>
+    let vm = new Vue({
+        el: ".box",
+        components: {
+            "top": {
+                template: "#mytop",
+                props:['title','src1','src2']
+            }
+        }
+    })
+</script>

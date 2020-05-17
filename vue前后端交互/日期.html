@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div class="box">
+			{{date|filterTimer()}}
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	let zero = function(val) {
+		if (val < 10) {
+			val = '0' + val
+		}
+		return val
+	}
+	let vm = new Vue({
+		el: '.box',
+		data: {
+			date: '',
+			timer: null,
+		},
+		mounted: function() {
+			// this.getTimer()
+			this.timer = setInterval(() => {
+				this.date = new Date()
+			}, 1000)
+	},
+	methods: {
+// 		getTimer() {
+// 			this.timer = setInterval(() => {
+// 				this.date = new Date()
+// 			}, 1000)
+// 		}
+	},
+	beforeDestroy: function() {
+		clearInterval(this.timer)
+	},
+	filters: {
+		filterTimer: function(value) {
+			value = new Date()
+			let y = value.getFullYear();
+			let m = zero(value.getMonth() + 1)
+			let d = zero(value.getDate());
+			let h = zero(value.getHours());
+			let ms = zero(value.getMinutes());
+			let s = zero(value.getSeconds());
+			return `${y}-${m}-${d} ${h}:${ms}:${s}`
+		}
+	},
+	})
+</script>

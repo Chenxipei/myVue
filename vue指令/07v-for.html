@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .mydiv {
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+        }
+
+        .divfont {
+            font-size: 30px;
+            font-weight: bold;
+        }
+    </style>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <ul>
+            <li v-for='(value,key,index) in person'>
+                {{value}}-{{key}}-{{index}}
+            </li>
+        </ul>
+        <ul>
+            <li v-for='(item,index) in arr'>
+                {{item}}-{{index}}
+            </li>
+        </ul>
+        <ul>
+            <li v-for='(item,index) in personlist'>
+                {{item}}-
+                <span v-for="(itemc,indexc) in item">{{itemc}}-</span>
+                
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
+<script>
+    let vm = new Vue({
+        el: ".box",
+        data: {
+            person:{
+                name:'张三',
+                age:18,
+                address:'宝安区'
+            },
+            arr:['唱','跳','rap'],
+            personlist:[
+            {
+                name:'鲲鲲',
+                age:"未知",
+                address:'随便'
+            },{
+                name:'比利王',
+                age:18,
+                address:'亚地圣哥'
+            },{
+                name:'张三',
+                age:18,
+                address:'宝安区'
+            },
+            ]
+        },
+    })
+</script>

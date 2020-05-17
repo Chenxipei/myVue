@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <p>
+            {{msg}}
+        </p>
+        <p>
+            {{number+1}}
+        </p>
+        <p>
+            {{ok?"YES":"NO"}}
+        </p>
+    </div>
+</body>
+</html>
+<script>
+    let vm = new Vue({
+        el: ".box",
+        data: {
+            msg: '今天天气不错',
+            number: '20',
+            ok: true
+        }
+    })
+    
+</script>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	</head>
+	<body>
+		<div class="box">
+			<button type="button" @click="get()">请求get</button>
+			<button type="button" @click="post()">请求post</button>
+		</div>
+	</body>
+</html>
+<script>
+	let vm = new Vue({
+		el: ".box",
+		data: {
+			url: "http://localhost:1020/"
+		},
+		mounted: function() {
+			console.log(1)
+			// 添加请求拦截器
+			axios.interceptors.request.use(function(config) {
+				// 在发送请求之前做些什么
+				console.log('请求拦截器')
+				return config;
+			}, function(error) {
+				// 对请求错误做些什么
+				return Promise.reject(error);
+			});
+			// 添加响应拦截器
+			axios.interceptors.response.use(function(response) {
+				// 对响应数据做点什么
+				console.log('响应拦截器')
+				return response;
+			}, function(error) {
+				// 对响应错误做点什么
+				return Promise.reject(error);
+			});
+		},
+		methods: {
+			get() {
+				axios.get(this.url + 'get', {
+						params: {
+							a: 10,
+							b: 2
+						}
+					})
+					.then(function(res) {
+						console.log(res);
+					})
+					.catch(function(err) {
+						console.log(err);
+					});
+			},
+			post() {
+				let params = new URLSearchParams();
+				params.append('a', 12)
+				params.append('b', 3)
+				axios.post(this.url + 'post', params)
+					.then(function(res) {
+						console.log(res);
+					})
+					.catch(function(err) {
+						console.log(err);
+					});
+			}
+		}
+	})
+</script>

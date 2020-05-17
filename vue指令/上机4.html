@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .navBox{
+            margin: 50px auto;
+            width: 400px;
+            text-align: center;
+        }
+        .box {
+            width: 400px;
+            display: flex;
+            margin-bottom: 50px;
+        }
+
+        .box div {
+            flex: 1;
+            padding: 10px;
+            background-color: #65b449;
+            color: #fff;
+            text-align: center;
+        }
+
+        .box .active {
+            background: #e45885;
+        }
+        .navBox  .sele{
+            display: inline-block;
+            background-color: #65b449;
+            padding: 5px;
+            color: #fff;
+        }
+    </style>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div class="navBox">
+        <div class="box">
+            <div v-for="(value,index) in nav" @click='clickNav(value,index)' :class='{active:value.active}'>
+                {{value.name}}
+            </div>
+        </div>
+        <div>
+            你选择了: <span class="sele" >{{txt}}</span>
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script>
+    let vm = new Vue({
+        el: ".navBox",
+        data: {
+            nav:[
+                {name:"HTML",active:true},
+                {name:"CSS",active:false},
+                {name:"JavaScript",active:false},
+                {name:"Vue.js",active:false}
+                ],
+            txt:"HTML",
+        },
+       
+        methods:{
+            clickNav:function(value,index){
+                for(let i=0;i<this.nav.length;i++){
+					this.nav[i].active =false
+				}
+				value.active=true
+				this.txt = value.name
+            }
+        }
+    })
+</script>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="./js/vue.js"></script>
+<body>
+    <!-- 一个标签里可以有多个指令 -->
+    <!-- 如果if条件不成立，就会显示else内容 -->
+    <div class="box">
+        <h1 v-if="flag">这是h1</h1>
+        <h5 v-else>这是h5</h5>
+    </div>
+</body>
+</html>
+<script>
+    let vm = new Vue({
+        el:'.box',
+        data:{
+            flag:false
+        }
+    })
+</script>

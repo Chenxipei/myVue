@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <pbox></pbox>
+
+    </div>
+    <template id="templateP">
+        <div>
+            <h1>父</h1>
+            <p>
+                接收：{{inC}}
+            </p>
+            <cbox :msg="pmsg" @candp="getval"></cbox>
+        </div>
+    </template>
+    <template id="templateC">
+        <div>
+            <span>子</span>
+            <p>接收：{{msg}}</p>
+            <button @click="fn()">子传父</button>
+        </div>
+    </template>
+</body>
+
+</html>
+<script>
+    let vm = new Vue({
+        el: ".box",
+        data: {},
+        components: {
+            "pbox": {
+                template: "#templateP",
+                data: function () {
+                    return {
+                        pmsg: "父传值",
+                        inC:""
+                    }
+
+                },
+                methods: {
+                    // 接收子传递过来的数据
+                    getval(val) {
+                        console.log(val)
+                        this.inC = val
+                    }
+                },
+                components: {
+                    "cbox": {
+                        template: "#templateC",
+                        props: ["msg"],//接收父的数据
+                        data: function () {
+                            return {
+                                cmsg: "子传值"
+                            }
+                        },
+                        methods: {
+                            //事件用于给父传递数据
+                            fn() {
+                    
+                                this.$emit('candp', this.cmsg)
+                            }
+                        }
+                    }
+
+                }
+            }
+
+        }
+    })
+</script>

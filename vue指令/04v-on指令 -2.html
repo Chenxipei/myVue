@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .p{
+            background-color: red;
+        }
+    </style>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 问题：事件冒泡。
+   v-on的修饰符
+   .stop 相当于调用event.stopPropagation()阻止事件的冒泡
+   .prevent 相当于调用event.preventDefault()阻止事件的默认行为
+   .self 事件只从自身触发时才会被调用 -->
+    <div class="box">
+        <div class="p" @click.self="pfn">
+            pDiv
+            <div class="c"  @click.stop="cfn">
+                cDiv
+            </div>
+            <!-- <div class="c"  @click.stop="cfn">
+                cDiv
+            </div> -->
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    let vm = new Vue({
+        el: ".box",
+        data: {
+           
+        },
+        methods: {
+            pfn: function () {
+                
+                console.log("p")
+            },
+            cfn: function () {
+                console.log("c")
+            }
+        }
+    })
+</script>

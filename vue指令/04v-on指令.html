@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <!-- v-on指令：用于绑定事件
+    语法：v-on：事件名称="函数名"
+    简写：@事件名称="函数名" -->
+    <div class="box">
+        <button v-on:click="fn1">点击1</button>
+        <button @click="fn2(2)">点击2</button>
+        <p>
+            <input type="text" name="" id="" v-show="show">
+        </p>
+    </div>
+</body>
+</html>
+<script>
+    let vm = new Vue({
+        el:".box",
+        data:{
+            show:false
+        },
+        methods:{
+            fn1:function(){
+                this.show = !this.show
+                console.log(1)
+            },
+            fn2:function(data){
+                console.log("fn2",data)
+            }
+        }
+    })
+</script>

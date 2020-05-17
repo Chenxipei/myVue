@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .mydiv {
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+        }
+
+        .divfont {
+            font-size: 30px;
+            font-weight: bold;
+        }
+    </style>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <!-- 标准语法 -->
+        <img v-bind:src="imgsrc" alt="">
+        <!-- 简写 -->
+        <img :src="imgsrc" alt="">
+        <!-- 根据变量判断动态绑定属性值 -->
+        <div v-bind:class='{mydiv:has}'>
+            1
+        </div>
+        <!-- 多个绑定 -->
+        <div v-bind:class='{mydiv:has,divfont:font}'>
+            2
+        </div>
+        <!-- 对象绑定 -->
+        <div v-bind:class='obj'>
+            3
+        </div>
+        <!-- 数组绑定 -->
+        <div v-bind:class='[styleA,styleB]'>
+            4
+        </div>
+        <!-- 三元操作 -->
+        <div v-bind:class='[1>1?styleA:"",styleB]'>
+            5
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    let vm = new Vue({
+        el: ".box",
+        data: {
+            imgsrc: "img/pic.png",
+            has: true,
+            font: true,
+            obj:{
+                'mydiv':true,
+                'divfont':true
+            },
+            styleA:"mydiv",
+            styleB:"divfont"
+        },
+    })
+</script>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.navBox {
+				margin: 20px auto;
+				padding: 30px;
+				width: 300px;
+				background: #61a1bc;
+			}
+			ul{
+				border-bottom: 1px solid #fff;
+			}
+			li{
+				list-style: none;
+				background: #e0c921;
+				margin: 10px 0;
+				padding: 10px;
+				display: flex;
+				justify-content: space-between;
+			}
+			h1{
+				text-align: center;
+			}
+			.toptal{
+				display: flex;
+				justify-content: space-between;
+				padding: 10px 20px;
+			}
+			.active{
+				background: #8dc16e;
+			}
+		</style>
+		<script src="./js/vue.js"></script>
+	</head>
+	<body>
+		<div class="navBox">
+			<h1>Services</h1>
+			<ul class="box">
+				<li v-for="(item,index) in pricelist" @click='clickNav(item,index)':class="{active:item.activeStatus}">
+					
+					<span>{{item.name}}</span><span>{{item.price}}</span>
+				</li>
+			</ul>
+			<div class="toptal">
+				<span>Total:</span> <span>{{total}}</span>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	let vm = new Vue({
+		el: ".navBox",
+		data: {
+			pricelist: [{
+					name: "Web Development",
+					price: 3000,
+					activeStatus: false
+				},
+				{
+					name: "Python",
+					price: 1000,
+					activeStatus: false
+				},
+				{
+					name: "Java",
+					price: 2000,
+					activeStatus: false
+				},
+				{
+					name: "GO",
+					price: 2200,
+					activeStatus: false
+				}
+			],
+			total: 0,
+		},
+
+		methods: {
+			clickNav: function(item, index) {
+				item.activeStatus = !item.activeStatus
+				if(item.activeStatus){
+					this.total = this.total+item.price
+				}else{
+					this.total = this.total-item.price
+				}
+			}
+		}
+	})
+</script>

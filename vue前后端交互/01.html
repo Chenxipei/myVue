@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	</head>
+	<body>
+		<div class="box">
+			<button type="button" @click="txt()">请求本地txt</button>
+			<button type="button" @click="get()">请求get</button>
+			<button type="button" @click="post()">请求post</button>
+		</div>
+	</body>
+</html>
+<script>
+	let vm = new Vue({
+		el: ".box",
+		data:{
+			url:"http://localhost:1020/"
+		},
+		methods: {
+			txt() {
+				axios.get('./abc.txt')
+					.then(function(response) {
+						console.log(response);
+					})
+					.catch(function(error) {
+						console.log(error);
+					});
+			},
+			get() {
+				axios.get(this.url+'get',{
+					params:{
+						a:10,
+						b:2
+					}
+				})
+					.then(function(res) {
+						console.log(res);
+					})
+					.catch(function(err) {
+						console.log(err);
+					});
+			},
+			post() {
+				let params = new URLSearchParams();
+				params.append('a',12)
+				params.append('b',3)
+				axios.post(this.url+'post',params)
+					.then(function(res) {
+						console.log(res);
+					})
+					.catch(function(err) {
+						console.log(err);
+					});
+			}
+		}
+	})
+</script>
