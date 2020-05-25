@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			li{
+				list-style: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<h1>路由传参</h1>
+			<router-link to="/userlsit">user lsit</router-link>
+			<router-view></router-view>
+		</div>
+		<template id="userlsit">
+			<div>
+				<ul>
+					<li>
+						<router-link to="/userlsit/detail/1">1 第一条列表项目</router-link>
+					</li>
+					<li>
+						<router-link to="/userlsit/detail/2">2 第二条列表项目</router-link>
+					</li>
+				</ul>
+				<router-view></router-view>
+			</div>
+		</template>
+		<template id="detail">
+			<div>
+				User的详细页面传递过来的用户编号：{{$route.params.id}}
+			</div>
+		</template>
+	</body>
+</html>
+<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/vue-router.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	let userlsit = Vue.extend({
+		template: '#userlsit'
+	})
+	let detail = Vue.extend({
+		template: '#detail'
+	})
+	let routes = [
+		{path: '/userlsit',component: userlsit},
+		{path:'/userlsit/detail/:id',component:detail}
+		]
+	let router = new VueRouter({
+		routes
+	})
+	let vm = new Vue({
+		el: "#box",
+		router
+	})
+</script>

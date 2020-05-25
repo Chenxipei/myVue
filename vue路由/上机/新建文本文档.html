@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <script src="./js/jquery-1.12.4.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/vue-router.js"></script>
+    <style>
+        #app{
+            width: 90%;
+            margin: 0 auto;
+        }
+        .box{
+          
+             height: 100px;
+             background: skyblue;
+             border-radius: 10px;
+         }
+         .box div{
+             height: 100px;
+             line-height: 100px;
+             padding-left: 50px;
+         }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">     
+                    <router-link class="navbar-brand" to='/vuejs'>vue</router-link>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><router-link to='index' >首页</router-link></li>
+                        <li><router-link to='mine' >关于我们</router-link></li>
+
+                        <li class="dropdown" id="myuse">
+                            <router-link to='ues' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                aria-expanded="false">账户中心 <span class="caret"></span></router-link>
+                            <ul class="dropdown-menu">    
+                                <li><router-link to='/news/pass'>密码管理</router-link></li>
+                            </ul>
+                        </li>
+                        <!-- <ues></ues> -->
+                        <li><router-link to='lod'>登录</router-link></li>
+
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div class="box">
+            <router-view></router-view>
+        </div>
+    </div>
+    <template id="ues">
+        <div>
+        
+            账户中心
+            <router-view></router-view>
+
+        </div>
+
+    </template>
+    <script>
+        let vuejs = Vue.extend({template:'<div>vue</div>'})
+        let index = Vue.extend({template:'<div>首页</div>'})
+        let mine = Vue.extend({template:'<div>关于我们</div>'})
+        let ues  = Vue.extend({template:'#ues'})
+        let lod = Vue.extend({template:'<div>登录</div>'})
+        let routes = [
+            {path:'/vuejs',component:vuejs},
+            {path:'/index',component:index},
+            {path:'/mine',component:mine},
+            {path:'/ues',component:ues,
+            children:[
+                    {path:'pass',component:{ template: '<div>密码管理</div>' }}
+                ]
+             },
+            {path:'/lod',component:lod},
+        ]
+        let router = new VueRouter({
+            routes
+        })
+        let vm = new  Vue({
+            el:'#app',
+           router,
+        })  
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<router-link to="/user/foo">/user/foo</router-link>
+			<router-link to="/user/foo/profile">/user/foo/profile</router-link>
+			<router-link to="/user/foo/posts">/user/foo/posts</router-link>
+			<router-view></router-view>
+		</div>
+		<template id="user">
+			<div>
+				<h1>userFoo</h1>
+				<router-view></router-view>
+			</div>
+		</template>
+		<template id="foo">
+			<div>
+				
+				Home
+				<router-view></router-view>
+			</div>
+		</template>
+	</body>
+</html>
+<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/vue-router.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	let user = Vue.extend({template:'#user'})
+	let routes = [
+		{path:'/user',component:user,
+		children:[
+			{path:'foo',component:{template:'#foo'},
+				children:[
+					{path:'profile',component:{template:'<div>profile</div>'}},
+					{path:'posts',component:{template:'<div>posts</div>'}}
+				]
+			}
+		]
+		}
+	]
+	let router = new VueRouter({
+		routes
+	})
+	let vm = new Vue({
+		el:"#box",
+		router
+	})
+</script>
