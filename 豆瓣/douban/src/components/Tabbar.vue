@@ -43,6 +43,8 @@ export default {
 </script>
 <style lang="less">
     .tabbar{
+		justify-content: space-around;
+		width: 100%;
 		position: fixed;
         display: flex;
 		left: 0;

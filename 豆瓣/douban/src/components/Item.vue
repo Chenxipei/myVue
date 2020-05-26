@@ -33,13 +33,13 @@ export default {
 </script>
 <style lang="less">
     .item{
-	padding-bottom:5px ;
-	font-size:12px ;
-        flex: 1;
+		padding-bottom:5px ;
+		font-size:12px ;
+		
 		color: #b2b2b2;
         img{
-            width: 100%;
-			height: 100/100rem;
+            width: 70/100rem;
+			height: 70/100rem;
         }
 		.active{
 			color: #42bd56;
